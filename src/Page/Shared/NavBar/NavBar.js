@@ -101,7 +101,7 @@ const NavBar = () => {
                     Logout
                   </button>
                 </li>
-                <li><a>Settings</a></li>
+                <li><a href="/">Settings</a></li>
               </ul>
             </div>
             :
