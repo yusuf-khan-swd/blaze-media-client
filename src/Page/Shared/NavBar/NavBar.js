@@ -88,9 +88,9 @@ const NavBar = () => {
       </div>
       <div className="navbar-end">
         {
-          user ?
+          user?.uid ?
             <div className="dropdown dropdown-end">
-              <label tabIndex={0} className="btn btn-ghost btn-circle avatar" title={`${user ? user.email : ""}`}>
+              <label tabIndex={0} className="btn btn-ghost btn-circle avatar" title={` ${user.email}`}>
                 <div className="w-10 rounded-full">
                   <FaUser className="w-full h-full"></FaUser>
                 </div>
@@ -106,7 +106,6 @@ const NavBar = () => {
             </div>
             :
             <Link to={`/login`} className="btn">Login</Link>
-
         }
       </div>
     </div>

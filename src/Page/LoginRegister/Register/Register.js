@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Context/AuthProvider/AuthProvider";
 
 const Register = () => {
-  const { createUser } = useContext(AuthContext);
+  const { googleLogin, createUser } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
   const [isDataLoading, setIsDataLoading] = useState(false);
   const [registerError, setRegisterError] = useState("");
@@ -42,11 +42,28 @@ const Register = () => {
       })
   };
 
+  const handleGoogleLogin = () => {
+    setIsDataLoading(true);
+    googleLogin()
+      .then(result => {
+        const user = result.user;
+        toast.success(`Welcome! ${user.displayName || user.email}`);
+        setIsDataLoading(false);
+        setRegisterError("");
+      })
+      .catch(error => {
+        console.log("google login error: ", error);
+        setIsDataLoading(false);
+        setRegisterError(error.message);
+      })
+  };
+
+
   return (
     <div className="container mx-auto mt-8 mb-16">
       <div className="m-2">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="card flex-shrink-0 w-full max-w-md shadow-2xl bg-base-100 mx-auto">
+          <div className="card flex-shrink-0 w-full max-w-2xl shadow-2xl bg-base-100 mx-auto">
             <div className="card-body">
               <h2 className="text-xl text-center font-bold">Register Form</h2>
               <div className="form-control">
@@ -124,6 +141,10 @@ const Register = () => {
                   <span className="label-text">Show Password</span>
                 </label>
               </div>
+              {
+                registerError &&
+                <p className="text-red-600">{registerError}</p>
+              }
               <div className="form-control mt-3">
                 <button className="btn btn-primary">Register</button>
               </div>
@@ -133,6 +154,9 @@ const Register = () => {
             </div>
           </div>
         </form>
+        <div className="flex flex-col max-w-2xl mx-auto mt-5">
+          <button onClick={handleGoogleLogin} className="btn capitalize text-lg" disabled={isDataLoading}>Google Login</button>
+        </div>
       </div>
     </div>
   );
