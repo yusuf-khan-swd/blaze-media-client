@@ -1,11 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { FaHome } from 'react-icons/fa';
 
 const NavBar = () => {
   const menuItems = (
     <>
       <li className="lg:mr-1 mb-1">
-        <Link to={`/home`}>Home</Link>
+        <Link to={`/home`}>
+          <FaHome></FaHome>
+        </Link>
       </li>
       <li className="lg:mr-1 mb-1">
         <Link to={`/login`}>Login</Link>
