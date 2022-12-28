@@ -124,7 +124,7 @@ const Register = () => {
                 />
                 <p className="text-red-600"><small>{errors.email?.message}</small></p>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <div className="grid grid-cols-1">
                 <div className="form-control">
                   <label className="label">
                     <span className="label-text">Password</span>
