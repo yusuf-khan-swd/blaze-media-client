@@ -1,20 +1,10 @@
 import React from 'react';
-import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
+import './AddAPost.css';
 
 const AddAPost = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
 
-  const onSubmit = (value) => {
-    const { postBody } = value;
-    console.log({ postBody });
-  };
-
-  const handleTextArea = () => {
+  const handlePost = () => {
     const postBody = document.getElementById("postBody").innerText;
     const str = postBody.replace(/\s\s+/g, " ");
 
@@ -27,23 +17,18 @@ const AddAPost = () => {
   return (
     <div className="container mx-auto mt-8 mb-16">
       <div className="m-2">
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="card flex-shrink-0 mx-auto">
+        <form>
+          <div className="card flex-shrink-0 max-w-lg mx-auto">
             <div className="card-body">
               <div className="form-control">
-                <textarea
-                  {...register("postBody", { required: "Post body field is required" })}
-                  placeholder={`What's happening?`}
-                  className="textarea textarea-bordered"
-                />
                 <div
+                  data-text={`What's happening?`}
                   id="postBody"
                   placeholder={`What's happening?`}
                   className="textarea textarea-bordered min-h-[150px]" contentEditable></div>
-                <p className="text-red-600"><small>{errors.postBody?.message}</small></p>
               </div>
               <div className="form-control mt-3">
-                <button onClick={handleTextArea} className="btn btn-primary">Post</button>
+                <button onClick={handlePost} className="btn btn-primary">Post</button>
               </div>
             </div>
           </div>
