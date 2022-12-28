@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 
 const Login = () => {
+  const { googleLogin, login } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
   const [isDataLoading, setIsDataLoading] = useState(false);
   const [loginError, setLoginError] = useState("");
-  const { googleLogin, login } = useContext(AuthContext);
 
   const handleShowPassword = (event) => {
     setShowPassword(event.target.checked);

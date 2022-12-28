@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Context/AuthProvider/AuthProvider";
 
 const Register = () => {
-  const { googleLogin, createUser } = useContext(AuthContext);
+  const { googleLogin, createUser, updateUserInfo } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
   const [isDataLoading, setIsDataLoading] = useState(false);
   const [registerError, setRegisterError] = useState("");
@@ -21,24 +21,47 @@ const Register = () => {
   } = useForm();
 
   const onSubmit = (value) => {
+    setIsDataLoading(true);
     const { name, email, password, confirm } = value;
 
     if (password !== confirm) {
+      setIsDataLoading(false);
       return toast.error("Password did not matched");
     }
 
     createUser(email, password)
       .then(result => {
         const user = result.user;
-        console.log(user);
         toast.success(`Welcome! ${user.email}`);
         setIsDataLoading(false);
         setRegisterError("");
+        handleUpdateUserInfo(name);
       })
       .catch(error => {
         console.log("Register error: ", error);
         setIsDataLoading(false);
         setRegisterError(error.message);
+        toast.error(error.message);
+      })
+  };
+
+  const handleUpdateUserInfo = (name) => {
+    const profile = {
+      displayName: name
+    };
+
+    setIsDataLoading(true);
+    updateUserInfo(profile)
+      .then(() => {
+        setIsDataLoading(false);
+        setRegisterError("");
+        toast.success("successfully update user display name")
+      })
+      .catch(error => {
+        console.log("update user info error: ", error);
+        setRegisterError(error.message);
+        toast.error(error.message);
+        setIsDataLoading(false);
       })
   };
 
@@ -146,7 +169,7 @@ const Register = () => {
                 <p className="text-red-600">{registerError}</p>
               }
               <div className="form-control mt-3">
-                <button className="btn btn-primary">Register</button>
+                <button className="btn btn-primary" disabled={isDataLoading}>Register</button>
               </div>
               <div className="form-control">
                 <p>Already have an account? <Link className="text-blue-600" to={`/login`}>Please Login</Link></p>
