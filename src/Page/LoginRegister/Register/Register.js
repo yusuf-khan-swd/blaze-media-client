@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -91,8 +92,11 @@ const Register = () => {
                 <span className="label-text">Show Password</span>
               </label>
             </div>
-            <div className="form-control mt-6">
+            <div className="form-control mt-3">
               <button className="btn btn-primary">Register</button>
+            </div>
+            <div className="form-control">
+              <p>Already have an account? <Link className="text-blue-600" to={`/login`}>Please Login</Link></p>
             </div>
           </div>
         </div>

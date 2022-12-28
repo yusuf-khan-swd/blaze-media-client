@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -15,9 +16,7 @@ const Login = () => {
   } = useForm();
 
   const onSubmit = (value) => {
-    console.log(value);
     const { email, password } = value;
-
   };
 
   return (
@@ -62,8 +61,11 @@ const Login = () => {
                 <span className="label-text">Show Password</span>
               </label>
             </div>
-            <div className="form-control mt-6">
+            <div className="form-control mt-3">
               <button className="btn btn-primary">Login</button>
+            </div>
+            <div className="form-control">
+              <p>New to Blaze Media? <Link className="text-blue-600" to={`/register`}>Please Register</Link></p>
             </div>
           </div>
         </div>
