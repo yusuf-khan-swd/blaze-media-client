@@ -4,20 +4,24 @@ import './AddAPost.css';
 
 const AddAPost = () => {
 
-  const handlePost = () => {
+  const handlePost = (event) => {
+    event.preventDefault();
+
     const postBody = document.getElementById("postBody").innerText;
     const str = postBody.replace(/\s\s+/g, " ");
 
     if (str.length < 1) {
       return toast.error("Please type what you are thinking")
     }
+
+    document.getElementById("postBody").innerHTML = "";
     console.log({ str });
   }
 
   return (
     <div className="container mx-auto mt-8 mb-16">
       <div className="m-2">
-        <form>
+        <form onSubmit={handlePost}>
           <div className="card flex-shrink-0 max-w-lg mx-auto">
             <div className="card-body">
               <div className="form-control">
@@ -28,7 +32,7 @@ const AddAPost = () => {
                   className="textarea textarea-bordered min-h-[150px]" contentEditable></div>
               </div>
               <div className="form-control mt-3">
-                <button onClick={handlePost} className="btn btn-primary">Post</button>
+                <button className="btn btn-primary capitalize text-xl h-10">Post</button>
               </div>
             </div>
           </div>
