@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [isDataLoading, setIsDataLoading] = useState(false);
+  const [loginError, setLoginError] = useState("");
+  const { googleLogin } = useContext(AuthContext);
 
   const handleShowPassword = (event) => {
     setShowPassword(event.target.checked);
@@ -17,6 +22,23 @@ const Login = () => {
 
   const onSubmit = (value) => {
     const { email, password } = value;
+  };
+
+
+  const handleGoogleLogin = () => {
+    setIsDataLoading(true);
+    googleLogin()
+      .then(result => {
+        const user = result.user;
+        toast.success(`Welcome! ${user.displayName}`);
+        setIsDataLoading(false);
+        setLoginError("");
+      })
+      .catch(error => {
+        console.log("google login error: ", error);
+        setIsDataLoading(false);
+        setLoginError(error.message);
+      })
   };
 
   return (
@@ -65,6 +87,10 @@ const Login = () => {
                   <span className="label-text">Show Password</span>
                 </label>
               </div>
+              {
+                loginError &&
+                <p className="text-red-600">{loginError}</p>
+              }
               <div className="form-control mt-3">
                 <button className="btn btn-primary">Login</button>
               </div>
@@ -74,6 +100,9 @@ const Login = () => {
             </div>
           </div>
         </form>
+        <div className="flex flex-col max-w-sm mx-auto mt-5">
+          <button onClick={handleGoogleLogin} className="btn capitalize text-lg">Google Login</button>
+        </div>
       </div>
     </div>
   );
