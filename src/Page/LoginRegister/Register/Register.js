@@ -1,45 +1,93 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleShowPassword = event => {
+  const handleShowPassword = (event) => {
     setShowPassword(event.target.checked);
-  }
+  };
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (value) => {
+    const { name, email, password, confirm } = value;
+
+    if (password !== confirm) {
+      return toast.error("Password did not matched");
+    }
+  };
 
   return (
     <div className="container mx-auto mt-8 mb-16">
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="card flex-shrink-0 w-full max-w-lg shadow-2xl bg-base-100 mx-auto">
           <div className="card-body">
             <h2 className="text-xl text-center font-bold">Register Form</h2>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Your Name</span>
+                <span className="label-text text-md">Your Name</span>
               </label>
-              <input type="text" placeholder="name" className="input input-bordered" />
+              <input
+                {...register("name", { required: "name field is required" })}
+                type="text"
+                placeholder="name"
+                className="input input-bordered"
+              />
+              <p className="text-red-600"><small>{errors.name?.message}</small></p>
             </div>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
               </label>
-              <input type="email" placeholder="email" className="input input-bordered" />
+              <input
+                {...register("email", { required: "email field is required" })}
+                type="email"
+                placeholder="email"
+                className="input input-bordered"
+              />
+              <p className="text-red-600"><small>{errors.email?.message}</small></p>
             </div>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Password</span>
               </label>
-              <input type={`${showPassword ? "text" : "password"}`} placeholder="password" className="input input-bordered" />
+              <input
+                {...register("password", {
+                  required: "password field is required",
+                })}
+                type={`${showPassword ? "text" : "password"}`}
+                placeholder="password"
+                className="input input-bordered"
+              />
+              <p className="text-red-600"><small>{errors.password?.message}</small></p>
             </div>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Confirm Password</span>
               </label>
-              <input type={`${showPassword ? "text" : "password"}`} placeholder="password" className="input input-bordered" />
+              <input
+                {...register("confirm", {
+                  required: "confirm password field is required",
+                })}
+                type={`${showPassword ? "text" : "password"}`}
+                placeholder="password"
+                className="input input-bordered"
+              />
+              <p className="text-red-600"><small>{errors.confirm?.message}</small></p>
             </div>
             <div className="form-control">
               <label className="label cursor-pointer justify-start">
-                <input onClick={handleShowPassword} type="checkbox" className="checkbox checkbox-primary checkbox-sm mr-2" />
+                <input
+                  onClick={handleShowPassword}
+                  type="checkbox"
+                  className="checkbox checkbox-primary checkbox-sm mr-2"
+                />
                 <span className="label-text">Show Password</span>
               </label>
             </div>
