@@ -4,13 +4,13 @@ import { Link } from "react-router-dom";
 const NavBar = () => {
   const menuItems = (
     <>
-      <li>
+      <li className="lg:mr-1 mb-1">
         <Link to={`/home`}>Home</Link>
       </li>
-      <li>
+      <li className="lg:mr-1 mb-1">
         <Link to={`/login`}>Login</Link>
       </li>
-      <li>
+      <li className="lg:mr-1 mb-1">
         <Link to={`/register`}>Register</Link>
       </li>
       <li tabIndex={0}>
@@ -27,15 +27,15 @@ const NavBar = () => {
           </svg>
         </Link>
         <ul className="p-2 shadow bg-base-100 rounded-box w-40 overflow-hidden truncate">
-          <li>
-            <Link to={`/`}>Submenu 10 Submenu 10</Link>
+          <li className="lg:mr-1 overflow-hidden mb-1">
+            <Link to={`/`}>Submenu 10 Submenu 10 Submenu 10</Link>
           </li>
-          <li>
+          <li className="lg:mr-1 mb-1">
             <Link to={`/`}>Submenu 2</Link>
           </li>
         </ul>
       </li>
-      <li>
+      <li className="lg:mr-1 mb-1">
         <Link to="/">Item 3</Link>
       </li>
     </>
