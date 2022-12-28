@@ -25,9 +25,9 @@ const Register = () => {
   };
 
   return (
-    <div className="container mx-auto mt-8 mb-16">
+    <div className="container mx-auto my-16">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="card flex-shrink-0 w-full max-w-lg shadow-2xl bg-base-100 mx-auto">
+        <div className="card flex-shrink-0 w-full max-w-md shadow-2xl bg-base-100 mx-auto">
           <div className="card-body">
             <h2 className="text-xl text-center font-bold">Register Form</h2>
             <div className="form-control">
@@ -56,31 +56,45 @@ const Register = () => {
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Password</span>
+                <span className="label-text">Your Image</span>
               </label>
               <input
-                {...register("password", {
-                  required: "password field is required",
-                })}
-                type={`${showPassword ? "text" : "password"}`}
-                placeholder="password"
-                className="input input-bordered"
+                {...register("email", { required: "email field is required" })}
+                type="file"
+                placeholder="email"
+                className="file-input file-input-bordered w-full"
               />
-              <p className="text-red-600"><small>{errors.password?.message}</small></p>
+              <p className="text-red-600"><small>{errors.email?.message}</small></p>
             </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Confirm Password</span>
-              </label>
-              <input
-                {...register("confirm", {
-                  required: "confirm password field is required",
-                })}
-                type={`${showPassword ? "text" : "password"}`}
-                placeholder="password"
-                className="input input-bordered"
-              />
-              <p className="text-red-600"><small>{errors.confirm?.message}</small></p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Password</span>
+                </label>
+                <input
+                  {...register("password", {
+                    required: "password field is required",
+                  })}
+                  type={`${showPassword ? "text" : "password"}`}
+                  placeholder="password"
+                  className="input input-bordered"
+                />
+                <p className="text-red-600"><small>{errors.password?.message}</small></p>
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Confirm Password</span>
+                </label>
+                <input
+                  {...register("confirm", {
+                    required: "confirm password field is required",
+                  })}
+                  type={`${showPassword ? "text" : "password"}`}
+                  placeholder="password"
+                  className="input input-bordered"
+                />
+                <p className="text-red-600"><small>{errors.confirm?.message}</small></p>
+              </div>
             </div>
             <div className="form-control">
               <label className="label cursor-pointer justify-start">
