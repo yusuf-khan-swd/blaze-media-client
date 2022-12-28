@@ -60,9 +60,8 @@ const Register = () => {
                   <span className="label-text">Your Image</span>
                 </label>
                 <input
-                  {...register("email", { required: "email field is required" })}
+                  {...register("image")}
                   type="file"
-                  placeholder="email"
                   className="file-input file-input-bordered w-full"
                 />
                 <p className="text-red-600"><small>{errors.email?.message}</small></p>
