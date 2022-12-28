@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../Context/AuthProvider/AuthProvider";
 
 const Register = () => {
+  const { createUser } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
+  const [isDataLoading, setIsDataLoading] = useState(false);
+  const [registerError, setRegisterError] = useState("");
 
   const handleShowPassword = (event) => {
     setShowPassword(event.target.checked);
@@ -22,6 +26,20 @@ const Register = () => {
     if (password !== confirm) {
       return toast.error("Password did not matched");
     }
+
+    createUser(email, password)
+      .then(result => {
+        const user = result.user;
+        console.log(user);
+        toast.success(`Welcome! ${user.email}`);
+        setIsDataLoading(false);
+        setRegisterError("");
+      })
+      .catch(error => {
+        console.log("Register error: ", error);
+        setIsDataLoading(false);
+        setRegisterError(error.message);
+      })
   };
 
   return (

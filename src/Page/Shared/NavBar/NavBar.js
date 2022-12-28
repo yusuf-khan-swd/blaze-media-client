@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { FaHome } from 'react-icons/fa';
+import { AuthContext } from "../../../Context/AuthProvider/AuthProvider";
 
 const NavBar = () => {
+  const { user } = useContext(AuthContext);
+
   const menuItems = (
     <>
       <li className="lg:mr-1 mb-1">
@@ -79,7 +82,7 @@ const NavBar = () => {
         <ul className="menu menu-horizontal px-1">{menuItems}</ul>
       </div>
       <div className="navbar-end">
-        <Link to={`/`} className="btn">
+        <Link to={`/`} className="btn" title={`${user ? user.email : ""}`}>
           Get started
         </Link>
       </div>
