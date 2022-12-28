@@ -49,6 +49,9 @@ const Login = () => {
                 placeholder="password"
                 className="input input-bordered"
               />
+              <label className="label">
+                <a href="/" className="label-text-alt link link-hover">Forgot password?</a>
+              </label>
               <p className="text-red-600"><small>{errors.password?.message}</small></p>
             </div>
             <div className="form-control">
