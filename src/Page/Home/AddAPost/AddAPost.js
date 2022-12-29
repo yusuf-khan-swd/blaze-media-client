@@ -7,7 +7,8 @@ const AddAPost = () => {
   const handlePost = (event) => {
     event.preventDefault();
 
-    const postImage = document.getElementById("postImage").innerHTML;
+    const fileField = document.querySelector('input[type="file"]');
+
     const postBody = document.getElementById("postBody").innerText;
     const str = postBody.replace(/\s\s+/g, " ");
 
@@ -15,8 +16,14 @@ const AddAPost = () => {
       return toast.error("Please type what you are thinking");
     }
 
+    handleImageUpload(fileField);
     document.getElementById("postBody").innerHTML = "";
-    console.log({ str, postImage });
+    document.getElementById("postImage").value = "";
+  };
+
+  const handleImageUpload = fileField => {
+    const formData = new FormData();
+    console.log(fileField);
   };
 
   return (
@@ -36,9 +43,11 @@ const AddAPost = () => {
               </div>
               <div className="form-control">
                 <input
-                  type="file"
-                  className="file-input file-input-bordered w-full"
                   id="postImage"
+                  type="file"
+                  accept="image/*"
+                  className="file-input file-input-bordered w-full"
+                  required
                 />
               </div>
               <div className="form-control mt-3">
