@@ -3,6 +3,9 @@ import Main from "../../Layouts/Main";
 import Home from "../../Page/Home/Home/Home";
 import Login from "../../Page/LoginRegister/Login/Login";
 import Register from "../../Page/LoginRegister/Register/Register";
+import Media from "../../Page/Media/Media/Media";
+import Message from "../../Page/Message/Message/Message";
+import About from "../../Page/Other/About/About";
 
 export const router = createBrowserRouter([
   {
@@ -17,6 +20,18 @@ export const router = createBrowserRouter([
       {
         path: "/home",
         element: <Home></Home>
+      },
+      {
+        path: "/media",
+        element: <Media></Media>
+      },
+      {
+        path: "/message",
+        element: <Message></Message>
+      },
+      {
+        path: "/about",
+        element: <About></About>
       },
       {
         path: "/login",
