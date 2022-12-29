@@ -20,15 +20,14 @@ const AddAPost = () => {
     }
 
     handleImageUpload(fileField);
-    // document.getElementById("postBody").innerHTML = "";
-    // document.getElementById("postImage").value = "";
+    document.getElementById("postBody").innerHTML = "";
+    document.getElementById("postImage").value = "";
   };
 
   const handleImageUpload = async (fileField) => {
     setIsDataLoading(true);
     const formData = new FormData();
     formData.append('image', fileField.files[0]);
-    console.log(formData);
 
     try {
       const res = await fetch(`https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_ImageHostingKey}`, {
