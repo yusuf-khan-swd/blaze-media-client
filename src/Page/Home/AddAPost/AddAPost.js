@@ -24,33 +24,34 @@ const AddAPost = () => {
     // document.getElementById("postImage").value = "";
   };
 
-  const handleImageUpload = fileField => {
+  const handleImageUpload = async (fileField) => {
     setIsDataLoading(true);
     const formData = new FormData();
     formData.append('image', fileField.files[0]);
     console.log(formData);
 
-    fetch(`https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_ImageHostingKey}`, {
-      method: "POST",
-      body: formData
-    })
-      .then(res => res.json())
-      .then(data => {
-        if (data.status === 200) {
-          toast.success("Image uploaded");
-          console.log(data);
-          setIsDataLoading(false);
-        }
-        else {
-          console.log("Image hosting problem", data);
-          toast.error(data.error.message);
-          setIsDataLoading(false);
-        }
+    try {
+      const res = await fetch(`https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_ImageHostingKey}`, {
+        method: "POST",
+        body: formData
       })
-      .catch(error => {
-        console.log("Image hosting error", error);
+
+      const data = await res.json();
+      if (data.status === 200) {
+        toast.success("Image uploaded");
+        console.log(data);
         setIsDataLoading(false);
-      })
+      }
+      else {
+        console.log("Image hosting problem", data);
+        toast.error(data.error.message);
+        setIsDataLoading(false);
+      }
+
+    } catch (error) {
+      console.log("Image hosting error", error);
+      setIsDataLoading(false);
+    }
   };
 
   return (
