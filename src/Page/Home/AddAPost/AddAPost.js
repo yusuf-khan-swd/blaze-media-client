@@ -1,22 +1,23 @@
-import React from 'react';
-import { toast } from 'react-hot-toast';
-import './AddAPost.css';
+import React from "react";
+import { toast } from "react-hot-toast";
+import "./AddAPost.css";
 
 const AddAPost = () => {
 
   const handlePost = (event) => {
     event.preventDefault();
 
+    const postImage = document.getElementById("postImage").innerHTML;
     const postBody = document.getElementById("postBody").innerText;
     const str = postBody.replace(/\s\s+/g, " ");
 
     if (str.length < 1) {
-      return toast.error("Please type what you are thinking")
+      return toast.error("Please type what you are thinking");
     }
 
     document.getElementById("postBody").innerHTML = "";
-    console.log({ str });
-  }
+    console.log({ str, postImage });
+  };
 
   return (
     <div className="container mx-auto mt-8 mb-16">
@@ -29,10 +30,24 @@ const AddAPost = () => {
                   data-text={`What's happening?`}
                   id="postBody"
                   placeholder={`What's happening?`}
-                  className="textarea textarea-bordered min-h-[150px]" contentEditable></div>
+                  className="textarea textarea-bordered min-h-[150px]"
+                  contentEditable
+                ></div>
+              </div>
+              <div className="form-control">
+                <input
+                  type="file"
+                  className="file-input file-input-bordered w-full"
+                  id="postImage"
+                />
               </div>
               <div className="form-control mt-3">
-                <button className="btn btn-primary capitalize text-xl h-10">Post</button>
+                <button
+                  type="submit"
+                  className=" btn btn-primary capitalize text-xl h-10"
+                >
+                  Post
+                </button>
               </div>
             </div>
           </div>
