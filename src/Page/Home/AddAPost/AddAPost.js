@@ -5,26 +5,26 @@ import "./AddAPost.css";
 const AddAPost = () => {
   const [isDataLoading, setIsDataLoading] = useState(false);
 
-  const handlePost = (event) => {
+  const handleFormSubmit = (event) => {
     event.preventDefault();
     setIsDataLoading(true);
 
     const fileField = document.querySelector('input[type="file"]');
 
-    const postBody = document.getElementById("postBody").innerText;
-    const str = postBody.replace(/\s\s+/g, " ");
+    const getPostBody = document.getElementById("postBody").innerText;
+    const postBody = getPostBody.replace(/\s\s+/g, " ");
 
-    if (str.length < 1) {
+    if (postBody.length < 1) {
       setIsDataLoading(false);
       return toast.error("Please type what you are thinking");
     }
 
-    handleImageUpload(fileField);
+    handleAddPost(fileField, postBody);
     document.getElementById("postBody").innerHTML = "";
     document.getElementById("postImage").value = "";
   };
 
-  const handleImageUpload = async (fileField) => {
+  const handleAddPost = async (fileField, postBody) => {
     setIsDataLoading(true);
     const formData = new FormData();
     formData.append('image', fileField.files[0]);
@@ -38,8 +38,10 @@ const AddAPost = () => {
       const data = await res.json();
       if (data.status === 200) {
         toast.success("Image uploaded");
-        console.log(data);
+        const imageUrl = data.data.url;
+        console.log({ imageUrl, postBody })
         setIsDataLoading(false);
+
       }
       else {
         console.log("Image hosting problem", data);
@@ -53,10 +55,11 @@ const AddAPost = () => {
     }
   };
 
+
   return (
     <div className="container mx-auto mt-8 mb-16">
       <div className="m-2">
-        <form onSubmit={handlePost}>
+        <form onSubmit={handleFormSubmit}>
           <div className="card flex-shrink-0 max-w-lg mx-auto">
             <div className="card-body">
               <div className="form-control">
