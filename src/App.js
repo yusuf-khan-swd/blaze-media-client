@@ -1,15 +1,15 @@
-import { useState } from 'react';
+import { useContext } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { RouterProvider } from 'react-router-dom';
 import './App.css';
+import { ThemeContext } from './Context/ThemeProvider/ThemeProvider';
 import { router } from './Routes/Routes/Routes';
 
 function App() {
-  const [darkTheme, setDarkTheme] = useState(false);
+  const { darkTheme } = useContext(ThemeContext);
 
   return (
     <div data-theme={`${darkTheme ? "dark" : "light"}`}>
-      <button className="btn btn-ghost m-2" onClick={() => setDarkTheme(!darkTheme)}>{darkTheme ? "Light" : "Dark"}</button>
       <RouterProvider router={router}></RouterProvider>
       <Toaster></Toaster>
     </div>
