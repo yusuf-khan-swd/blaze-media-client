@@ -86,7 +86,7 @@ const Register = () => {
     <div className="container mx-auto mt-8 mb-16">
       <div className="m-2">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="card flex-shrink-0 w-full max-w-2xl shadow-2xl bg-base-100 mx-auto">
+          <div className="card flex-shrink-0 w-full max-w-lg shadow-2xl bg-base-100 mx-auto">
             <div className="card-body">
               <h2 className="text-xl text-center font-bold">Register Form</h2>
               <div className="form-control">
@@ -110,17 +110,6 @@ const Register = () => {
                   type="email"
                   placeholder="Email"
                   className="input input-bordered"
-                />
-                <p className="text-red-600"><small>{errors.email?.message}</small></p>
-              </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Your Image</span>
-                </label>
-                <input
-                  {...register("image")}
-                  type="file"
-                  className="file-input file-input-bordered w-full"
                 />
                 <p className="text-red-600"><small>{errors.email?.message}</small></p>
               </div>
@@ -169,7 +158,7 @@ const Register = () => {
                 <p className="text-red-600">{registerError}</p>
               }
               <div className="form-control mt-3">
-                <button className="btn btn-primary" disabled={isDataLoading}>Register</button>
+                <button className="btn btn-primary capitalize text-lg" disabled={isDataLoading}>Register</button>
               </div>
               <div className="form-control">
                 <p>Already have an account? <Link className="text-blue-600" to={`/login`}>Please Login</Link></p>
@@ -177,7 +166,7 @@ const Register = () => {
             </div>
           </div>
         </form>
-        <div className="flex flex-col max-w-2xl mx-auto mt-5">
+        <div className="flex flex-col max-w-lg mx-auto mt-5">
           <button onClick={handleGoogleLogin} className="btn capitalize text-lg" disabled={isDataLoading}>Google Login</button>
         </div>
       </div>
