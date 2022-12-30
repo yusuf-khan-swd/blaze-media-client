@@ -37,10 +37,32 @@ const AddAPost = () => {
 
       const data = await res.json();
       if (data.status === 200) {
-        toast.success("Image uploaded");
         const imageUrl = data.data.url;
-        console.log({ imageUrl, postBody })
-        setIsDataLoading(false);
+
+        const post = {
+          imageUrl, postBody
+        }
+
+        try {
+          const postRes = await fetch('http://localhost:5000/posts', {
+            method: 'POST',
+            headers: {
+              'content-type': 'application/json'
+            },
+            body: JSON.stringify(post)
+          })
+
+          const postData = await postRes.json();
+          if (postData.acknowledged) {
+            toast.success("Your post is added.");
+            setIsDataLoading(false);
+          }
+          setIsDataLoading(false);
+
+        } catch (error) {
+          console.log("data posting error", error);
+          setIsDataLoading(false);
+        }
 
       }
       else {
