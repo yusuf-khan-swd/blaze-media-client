@@ -5,7 +5,6 @@ import TopPost from '../TopPost/TopPost';
 const Home = () => {
   return (
     <div className="container mx-auto">
-      <h2>Home Page</h2>
       <AddAPost></AddAPost>
       <TopPost></TopPost>
     </div>

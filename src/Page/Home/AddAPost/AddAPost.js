@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { toast } from "react-hot-toast";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../../../Context/AuthProvider/AuthProvider";
 import "./AddAPost.css";
 
 const AddAPost = () => {
+  const { user } = useContext(AuthContext);
   const [isDataLoading, setIsDataLoading] = useState(false);
 
   const handleFormSubmit = (event) => {
@@ -37,10 +40,10 @@ const AddAPost = () => {
 
       const data = await res.json();
       if (data.status === 200) {
-        const imageUrl = data.data.url;
+        const postImgUrl = data.data.url;
 
         const post = {
-          imageUrl, postBody
+          postImgUrl, postBody, email: user?.email, name: user?.displayName
         }
 
         try {
@@ -76,6 +79,12 @@ const AddAPost = () => {
       setIsDataLoading(false);
     }
   };
+
+  if (!user?.uid) {
+    return <div className="m-2 h-[50vh]">
+      <h2 className="font-semibold text-center">Please <Link className="text-blue-600" to={`/login`}>Login</Link> to add post.</h2>
+    </div>
+  }
 
 
   return (
