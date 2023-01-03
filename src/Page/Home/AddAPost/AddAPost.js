@@ -43,7 +43,7 @@ const AddAPost = () => {
         const postImgUrl = data.data.url;
 
         const post = {
-          postImgUrl, postBody, email: user?.email, name: user?.displayName
+          postImgUrl, postBody, email: user?.email, name: user?.displayName, likes: 0, comment: 0
         }
 
         try {
@@ -85,7 +85,6 @@ const AddAPost = () => {
       <h2 className="font-semibold text-center">Please <Link className="text-blue-600" to={`/login`}>Login</Link> to add post.</h2>
     </div>
   }
-
 
   return (
     <div className="container mx-auto mt-8 mb-16">
