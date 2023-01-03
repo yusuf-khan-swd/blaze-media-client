@@ -55,7 +55,6 @@ const Register = () => {
       .then(() => {
         setIsDataLoading(false);
         setRegisterError("");
-        toast.success("successfully update user display name")
       })
       .catch(error => {
         console.log("update user info error: ", error);
