@@ -18,7 +18,7 @@ const Media = () => {
   }
 
   if (!posts.length) {
-    return <div className="m-2 h-[vh-50]">
+    return <div className="m-2 h-[80vh]">
       <h2 className="font-semibold text-center">No post available</h2>
     </div>
   }
