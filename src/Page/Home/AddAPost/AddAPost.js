@@ -22,12 +22,18 @@ const AddAPost = () => {
       return toast.error("Please type what you are thinking");
     }
 
-    handleAddPost(fileField, postBody);
+    if (fileField.files[0]) {
+      handleHostImage(fileField, postBody);
+    }
+    else {
+      handleAddPost(null, postBody);
+    }
+
     document.getElementById("postBody").innerHTML = "";
     document.getElementById("postImage").value = "";
   };
 
-  const handleAddPost = async (fileField, postBody) => {
+  const handleHostImage = async (fileField, postBody) => {
     setIsDataLoading(true);
     const formData = new FormData();
     formData.append('image', fileField.files[0]);
@@ -41,32 +47,7 @@ const AddAPost = () => {
       const data = await res.json();
       if (data.status === 200) {
         const postImgUrl = data.data.url;
-
-        const post = {
-          postImgUrl, postBody, email: user?.email, name: user?.displayName, likes: 0, comment: 0
-        }
-
-        try {
-          const postRes = await fetch('http://localhost:5000/posts', {
-            method: 'POST',
-            headers: {
-              'content-type': 'application/json'
-            },
-            body: JSON.stringify(post)
-          })
-
-          const postData = await postRes.json();
-          if (postData.acknowledged) {
-            toast.success("Your post is added.");
-            setIsDataLoading(false);
-          }
-          setIsDataLoading(false);
-
-        } catch (error) {
-          console.log("data posting error", error);
-          setIsDataLoading(false);
-        }
-
+        handleAddPost(postImgUrl, postBody);
       }
       else {
         console.log("Image hosting problem", data);
@@ -76,6 +57,34 @@ const AddAPost = () => {
 
     } catch (error) {
       console.log("Image hosting error", error);
+      setIsDataLoading(false);
+    }
+  };
+
+  const handleAddPost = async (postImgUrl, postBody) => {
+    const post = {
+      postImgUrl, postBody, email: user?.email, name: user?.displayName, likes: 0, comment: 0
+    }
+
+    try {
+      setIsDataLoading(true);
+      const postRes = await fetch('http://localhost:5000/posts', {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify(post)
+      })
+
+      const postData = await postRes.json();
+      if (postData.acknowledged) {
+        toast.success("Your post is added.");
+        setIsDataLoading(false);
+      }
+      setIsDataLoading(false);
+
+    } catch (error) {
+      console.log("data posting error", error);
       setIsDataLoading(false);
     }
   };
@@ -107,7 +116,6 @@ const AddAPost = () => {
                   type="file"
                   accept="image/*"
                   className="file-input file-input-bordered w-full"
-                  required
                   disabled={isDataLoading}
                 />
               </div>
