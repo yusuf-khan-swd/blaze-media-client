@@ -26,8 +26,11 @@ const Media = () => {
   return (
     <div className="container mx-auto">
       <div className="m-2">
-        <h2>media page all posts and images will be shown one by one regarding the uploading serial</h2>
-        <PostCard posts={posts}></PostCard>
+        <div className="grid grid-cols-1">
+          {
+            posts.map(post => <PostCard key={post._id} post={post}></PostCard>)
+          }
+        </div>
       </div>
     </div>
   );
