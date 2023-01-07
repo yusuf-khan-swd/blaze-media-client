@@ -25,12 +25,10 @@ const Media = () => {
 
   return (
     <div className="container mx-auto">
-      <div className="m-2">
-        <div className="grid grid-cols-1">
-          {
-            posts.map(post => <PostCard key={post._id} post={post}></PostCard>)
-          }
-        </div>
+      <div className="grid grid-cols-1 gap-y-6">
+        {
+          posts.map(post => <PostCard key={post._id} post={post}></PostCard>)
+        }
       </div>
     </div>
   );
