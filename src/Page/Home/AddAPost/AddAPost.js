@@ -2,11 +2,16 @@ import React, { useContext, useState } from "react";
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Context/AuthProvider/AuthProvider";
+import Loading from "../../Shared/Loading/Loading";
 import "./AddAPost.css";
 
 const AddAPost = () => {
-  const { user } = useContext(AuthContext);
+  const { user, authIsLoading } = useContext(AuthContext);
   const [isDataLoading, setIsDataLoading] = useState(false);
+
+  if (authIsLoading) {
+    return <Loading></Loading>
+  }
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
