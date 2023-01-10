@@ -6,12 +6,13 @@ import Register from "../../Page/LoginRegister/Register/Register";
 import Media from "../../Page/Media/Media/Media";
 import Message from "../../Page/Message/Message/Message";
 import About from "../../Page/Other/About/About";
+import DisplayError from "../../Page/Shared/DisplayError/DisplayError";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
-    errorElement: <h2>Error</h2>,
+    errorElement: <DisplayError></DisplayError>,
     children: [
       {
         path: "/",
