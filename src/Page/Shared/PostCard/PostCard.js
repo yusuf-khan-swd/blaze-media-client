@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react';
-import { toast } from 'react-hot-toast';
 import { FaRegCommentAlt, FaRegThumbsUp, FaThumbsUp } from 'react-icons/fa';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 
