@@ -1,16 +1,17 @@
 import React, { useContext, useState } from 'react';
+import { toast } from 'react-hot-toast';
 import { FaRegCommentAlt, FaRegThumbsUp, FaThumbsUp } from 'react-icons/fa';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 
 const PostCard = ({ post }) => {
   const { user } = useContext(AuthContext);
-  const { postImgUrl, postBody, likes } = post;
+  const { postImgUrl, postBody, likes, _id } = post;
 
   const [liked, setLiked] = useState(false);
   const [totalLikes, setTotalLikes] = useState(likes)
 
 
-  const handleLiked = () => {
+  const handleLiked = async () => {
     setLiked(!liked);
     const currentLike = !liked ? 1 : -1;
     setTotalLikes(totalLikes + currentLike);
@@ -18,8 +19,22 @@ const PostCard = ({ post }) => {
     const updatedLikes = totalLikes + currentLike;
     const userLiked = !liked;
     const userId = user.email;
+    const postId = _id;
 
-    console.log({ updatedLikes, userLiked, userId });
+    console.log({ updatedLikes, userLiked, userId, postId });
+    const likesInfo = { updatedLikes, postId };
+
+    const resOfLikes = await fetch(`http://localhost:5000/posts`, {
+      method: 'PUT',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(likesInfo)
+    });
+
+    await resOfLikes.json();
+
+
   };
 
   return (
