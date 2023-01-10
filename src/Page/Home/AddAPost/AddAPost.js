@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../../Context/AuthProvider/AuthProvider";
-import Loading from "../../Shared/Loading/Loading";
+import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
+import Loader from "../../Shared/Loaders/Loader";
 import "./AddAPost.css";
 
 const AddAPost = () => {
@@ -10,7 +10,7 @@ const AddAPost = () => {
   const [isDataLoading, setIsDataLoading] = useState(false);
 
   if (authIsLoading) {
-    return <Loading></Loading>
+    return <Loader></Loader>
   }
 
   const handleFormSubmit = (event) => {

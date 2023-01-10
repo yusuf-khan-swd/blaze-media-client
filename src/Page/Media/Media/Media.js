@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
-import Loading from '../../Shared/Loading/Loading';
+import Loader from '../../Shared/Loaders/Loader';
 import PostCard from '../../Shared/PostCard/PostCard';
 
 const Media = () => {
@@ -14,7 +14,7 @@ const Media = () => {
   });
 
   if (isLoading) {
-    return <Loading></Loading>
+    return <Loader></Loader>
   }
 
   if (!posts.length) {

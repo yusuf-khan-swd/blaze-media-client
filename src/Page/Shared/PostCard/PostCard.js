@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { FaRegCommentAlt, FaRegThumbsUp, FaThumbsUp } from 'react-icons/fa';
-import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
+import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 
 const PostCard = ({ post }) => {
   const { user } = useContext(AuthContext);

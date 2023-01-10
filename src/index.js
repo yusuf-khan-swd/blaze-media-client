@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import AuthProvider from './Context/AuthProvider/AuthProvider';
-import ThemeProvider from './Context/ThemeProvider/ThemeProvider';
+import AuthProvider from './contexts/AuthProvider/AuthProvider';
+import ThemeProvider from './contexts/ThemeProvider/ThemeProvider';
 import {
   QueryClient,
   QueryClientProvider,

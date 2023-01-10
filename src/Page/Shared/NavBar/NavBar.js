@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { FaHome, FaUser } from 'react-icons/fa';
-import { AuthContext } from "../../../Context/AuthProvider/AuthProvider";
+import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
 import { toast } from "react-hot-toast";
-import { ThemeContext } from "../../../Context/ThemeProvider/ThemeProvider";
+import { ThemeContext } from "../../../contexts/ThemeProvider/ThemeProvider";
 
 const NavBar = () => {
   const { user, logOut } = useContext(AuthContext);
