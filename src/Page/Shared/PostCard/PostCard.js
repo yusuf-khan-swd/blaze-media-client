@@ -7,7 +7,8 @@ const PostCard = ({ post }) => {
   const { postImgUrl, postBody, likes, _id } = post;
 
   const [liked, setLiked] = useState(false);
-  const [totalLikes, setTotalLikes] = useState(likes)
+  const [totalLikes, setTotalLikes] = useState(likes);
+  const [showComments, setShowComments] = useState(false);
 
 
   const handleLiked = async () => {
@@ -33,8 +34,11 @@ const PostCard = ({ post }) => {
 
     await resOfLikes.json();
 
-
   };
+
+  const handleComment = () => {
+    setShowComments(!showComments);
+  }
 
   return (
     <div className="mx-auto sm:w-[550px] w-[350px]">
@@ -61,11 +65,17 @@ const PostCard = ({ post }) => {
                 }
               </button>
             </div>
-            <button className="btn btn-ghost">
+            <button className="btn btn-ghost" onClick={handleComment}>
               <FaRegCommentAlt className="text-2xl"></FaRegCommentAlt>
             </button>
           </div>
         </div>
+        {
+          showComments &&
+          <div>
+            comment
+          </div>
+        }
       </div>
     </div>
   );
