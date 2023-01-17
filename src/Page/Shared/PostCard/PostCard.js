@@ -24,7 +24,7 @@ const PostCard = ({ post }) => {
     console.log({ updatedLikes, userLiked, userId, postId });
     const likesInfo = { updatedLikes, postId };
 
-    const resOfLikes = await fetch(`http://localhost:5000/posts`, {
+    const resOfLikes = await fetch(`https://blaze-media-server.vercel.app/posts`, {
       method: 'PUT',
       headers: {
         'content-type': 'application/json'

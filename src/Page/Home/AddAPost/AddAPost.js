@@ -73,7 +73,7 @@ const AddAPost = () => {
 
     try {
       setIsDataLoading(true);
-      const postRes = await fetch('http://localhost:5000/posts', {
+      const postRes = await fetch('https://blaze-media-server.vercel.app/posts', {
         method: 'POST',
         headers: {
           'content-type': 'application/json'
