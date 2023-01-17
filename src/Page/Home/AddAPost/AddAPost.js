@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { toast } from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
 import Loader from "../../Shared/Loaders/Loader";
 import "./AddAPost.css";
@@ -8,6 +8,7 @@ import "./AddAPost.css";
 const AddAPost = () => {
   const { user, authIsLoading } = useContext(AuthContext);
   const [isDataLoading, setIsDataLoading] = useState(false);
+  const navigate = useNavigate();
 
   if (authIsLoading) {
     return <Loader></Loader>
@@ -85,6 +86,7 @@ const AddAPost = () => {
       if (postData.acknowledged) {
         toast.success("Your post is added.");
         setIsDataLoading(false);
+        navigate("/media");
       }
       setIsDataLoading(false);
 
