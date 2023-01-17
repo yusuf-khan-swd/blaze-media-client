@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
 
 const Register = () => {
@@ -9,6 +9,7 @@ const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isDataLoading, setIsDataLoading] = useState(false);
   const [registerError, setRegisterError] = useState("");
+  const navigate = useNavigate();
 
   const handleShowPassword = (event) => {
     setShowPassword(event.target.checked);
@@ -55,6 +56,7 @@ const Register = () => {
       .then(() => {
         setIsDataLoading(false);
         setRegisterError("");
+        navigate("/");
       })
       .catch(error => {
         console.log("update user info error: ", error);
@@ -72,6 +74,7 @@ const Register = () => {
         toast.success(`Welcome! ${user.displayName || user.email}`);
         setIsDataLoading(false);
         setRegisterError("");
+        navigate("/");
       })
       .catch(error => {
         console.log("google login error: ", error);
