@@ -23,13 +23,16 @@ const AddAPost = () => {
     const getPostBody = document.getElementById("postBody").innerText;
     const postBody = getPostBody.replace(/\s\s+/g, " ");
 
-    if (postBody.length < 1) {
+    if (!postBody.length && !fileField.files[0]) {
       setIsDataLoading(false);
-      return toast.error("Please type what you are thinking");
+      return toast.error("Please add what you are thinking!!");
     }
 
-    if (fileField.files[0]) {
+    if (postBody.length && fileField.files[0]) {
       handleHostImage(fileField, postBody);
+    }
+    else if (fileField.files[0] && !postBody.length) {
+      handleHostImage(fileField, null);
     }
     else {
       handleAddPost(null, postBody);
