@@ -5,7 +5,7 @@ import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
 import { toast } from "react-hot-toast";
 import { ThemeContext } from "../../../contexts/ThemeProvider/ThemeProvider";
 
-const NavBar = () => {
+const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const { darkTheme, setDarkTheme } = useContext(ThemeContext);
 
@@ -111,4 +111,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+export default Navbar;
