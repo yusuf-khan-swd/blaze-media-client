@@ -22,7 +22,7 @@ const DisplayError = () => {
 
   return (
     <section>
-      <div className='flex items-center h-screen p-2 border'>
+      <div className='flex items-center h-screen p-2'>
         <div className="container flex flex-col items-center justify-center px-5 mx-auto my-8">
           <div className="max-w-md text-center">
             <div>
