@@ -50,7 +50,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="container mx-auto sticky top-0 z-40">
+    <div className="container mx-auto sticky top-0 z-40 mb-8">
       <div className="navbar bg-base-100">
         <div className="navbar-start">
           <div className="dropdown">
