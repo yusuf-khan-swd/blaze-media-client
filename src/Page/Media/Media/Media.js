@@ -25,7 +25,7 @@ const Media = () => {
 
   return (
     <div className="container mx-auto">
-      <div className="grid grid-cols-1 gap-y-6">
+      <div className="grid grid-cols-1 gap-y-6 mb-8">
         {
           posts.map(post => <PostCard key={post._id} post={post}></PostCard>)
         }
