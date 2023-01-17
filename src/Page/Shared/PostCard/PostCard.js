@@ -42,7 +42,7 @@ const PostCard = ({ post }) => {
 
   return (
     <div className="mx-auto sm:w-[550px] w-[350px]">
-      <div className="card card-compact shadow-lg rounded-lg border">
+      <div className="card card-compact shadow-lg rounded-lg">
         {
           postImgUrl &&
           <figure className="h-72 w-full bg-white"><img src={postImgUrl} alt="Post" /></figure>
